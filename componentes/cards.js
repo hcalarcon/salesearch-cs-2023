@@ -1,23 +1,87 @@
 import * as React from 'react';
-import { Avatar, Button, Card, Text } from 'react-native-paper';
+import { View, StyleSheet, Image } from 'react-native';
+import { Button, Card, Text } from 'react-native-paper';
 
 
 export function Cards(props) {
 
-    const { titulo, subtitulo, rutaimg} = props
+    const { titulo, subtitulo, ptovta, rutaimg } = props
 
     return (
-        <Card>
-            <Card.Title title="Card Title" subtitle="Card Subtitle"  />
+        <Card style={{ paddingHorizontal: 10 }}>
+            <Card.Title title={titulo} subtitle={"Precio $" + subtitulo} />
             <Card.Content>
-                <Text variant="titleLarge">{titulo}</Text>
-                <Text variant="bodyMedium">{subtitulo}</Text>
+                <Text variant="bodyMedium">Punto de venta: {ptovta}</Text>
             </Card.Content>
-            <Card.Cover source={require(rutaimg)} />
+            {/* <Card.Cover source={{uri: {rutaimg}}} /> */}
             <Card.Actions>
-                <Button>Cancel</Button>
-                <Button>Ok</Button>
+                <Button>Detalles</Button>
             </Card.Actions>
         </Card>
     );
 }
+
+export function Tarjetas(props) {
+    const { producto, precio, desc, ptovta, tipo, img } = props
+    
+    return (
+        
+        <View style={styles.card}>
+            <View style={styles.secimg}>
+                <Image source={{uri:img}} style={styles.image}></Image>
+            </View>
+
+            <View style={styles.desc}>
+                <Text>{producto}</Text>
+                <Text>Precio: ${precio}</Text>
+                <Text>{desc}</Text>
+                <Text>Punto de venta: {ptovta}</Text>
+            </View>
+            
+            <View style={styles.tipo}>
+                <Text style={styles.text}>{tipo}</Text>
+            </View>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    card: {
+        flex: 1,
+        flexDirection: 'row',
+        alignSelf: 'center',
+        backgroundColor: '#F5675A',
+        borderRadius: 25,
+        width: '98%',
+        shadowColor: 'gray',
+        shadowOpacity: 1,
+        paddingHorizontal: 10
+    },
+    tipo: {
+        backgroundColor: 'yellow',
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 30,
+        width: 50,
+        height: 25,
+        left: 0,
+        bottom: 2
+    },
+    text: {
+        textAlign: 'center'
+    },
+    image:{
+        width: 60,
+        height: 60,
+        borderRadius: 50
+    },
+    desc: {
+        width: 230
+    },
+    secimg: {
+        width: 60,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})

@@ -1,14 +1,138 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Input } from "../componentes/input";
 import { Searchbar } from 'react-native-paper';
-import Barra from "../componentes/barra";
 import { ToggleButton } from 'react-native-paper';
-
+import { Cards, Tarjetas } from "../componentes/cards";
+import Constants from "expo-constants"
 
 const Home = ({ navigation }) => {
 
     const [value, setValue] = React.useState('left');
+    const Data = [
+        {
+            id: 1,
+            nombre: "Queso",
+            marca: "noal",
+            precio: "1890",
+            cantidad: "kg",
+            ptovta: "la anonima suc 2",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 2,
+            nombre: "Fideo",
+            marca: "Matarazzo",
+            precio: "400",
+            cantidad: "500gr",
+            ptovta: "super todo",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 3,
+            nombre: "Queso",
+            marca: "noal",
+            precio: "1890",
+            cantidad: "kg",
+            ptovta: "la anonima suc 2",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "30%"
+
+        },
+        {
+            id: 4,
+            nombre: "Fideo",
+            marca: "Matarazzo",
+            precio: "400",
+            cantidad: "500gr",
+            ptovta: "super todo",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "3x2"
+        },
+        {
+            id: 5,
+            nombre: "Queso",
+            marca: "noal",
+            precio: "1890",
+            cantidad: "kg",
+            ptovta: "la anonima suc 2",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 6,
+            nombre: "Fideo",
+            marca: "Matarazzo",
+            precio: "400",
+            cantidad: "500gr",
+            ptovta: "super todo",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 7,
+            nombre: "Queso",
+            marca: "noal",
+            precio: "1890",
+            cantidad: "kg",
+            ptovta: "la anonima suc 2",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 8,
+            nombre: "Fideo",
+            marca: "Matarazzo",
+            precio: "400",
+            cantidad: "500gr",
+            ptovta: "super todo",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 9,
+            nombre: "Queso",
+            marca: "noal",
+            precio: "1890",
+            cantidad: "kg",
+            ptovta: "la anonima suc 2",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "30%"
+
+        },
+        {
+            id: 10,
+            nombre: "Fideo",
+            marca: "Matarazzo",
+            precio: "400",
+            cantidad: "500gr",
+            ptovta: "super todo",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "3x2"
+        },
+        {
+            id: 11,
+            nombre: "Queso",
+            marca: "noal",
+            precio: "1890",
+            cantidad: "kg",
+            ptovta: "la anonima suc 2",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        },
+        {
+            id: 12,
+            nombre: "Fideo",
+            marca: "Matarazzo",
+            precio: "400",
+            cantidad: "500gr",
+            ptovta: "super todo",
+            img: "https://reactnative.dev/img/tiny_logo.png",
+            tipo: "2x1"
+        }
+
+    ]
 
     return (
         <View style={estilos.container}>
@@ -21,13 +145,29 @@ const Home = ({ navigation }) => {
                 <Searchbar
                     placeholder="Buscar"
                 />
-                
-            </View>
-
-            <View>
-                <FlatList>
-                    
+                <FlatList style={{padding:5}}
+                    data={Data}
+                    renderItem={
+                        ({ item }) => <Tarjetas 
+                        producto={item.nombre} 
+                        tipo={item.tipo} 
+                        img={item.img}
+                        precio={item.precio}
+                        desc={item.desc}
+                        ptovta={item.ptovta}
+                        /> /* <Cards titulo={item.nombre}
+                            subtitulo={item.precio} 
+                            ptovta={item.ptovta}
+                            /> */
+                    }
+                    keyExtractor={item => item.id}
+                    ItemSeparatorComponent={() => (
+                        <View style={{ height: 8 }} />
+                      )}
+                    ListHeaderComponent={<Text></Text>}
+                >
                 </FlatList>
+
             </View>
         </View>
     );
@@ -37,14 +177,19 @@ const estilos = StyleSheet.create(
     {
         container: {
             flex: 1,
-            paddingTop: 40,
-            paddingHorizontal: 10
+            paddingHorizontal: 1,
+            marginTop: Constants.statusBarHeight
 
         },
         superior: {
-            flex: 0.2,
-            gap: 5,
-
+            flex: 1,
+            paddingBottom:10
+        },
+        flat: {
+            
+        },
+        flatti:{
+            padding: 5
         }
     }
 )

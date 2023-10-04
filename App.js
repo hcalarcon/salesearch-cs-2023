@@ -16,6 +16,7 @@ const Tabs = createMaterialBottomTabNavigator();
 const TabNav = () => {
   return (
     <Tabs.Navigator activeColor='black' barStyle={{ backgroundColor: '#F52C01', height:70 }}>
+  
       <Tabs.Screen 
       name="Home" 
       component={Home} 
@@ -38,7 +39,8 @@ const TabNav = () => {
   const StackNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Principal" options={{headerShown: false}} component={Home} />
+        
+        <Stack.Screen name="Principal" options={{headerShown: false}} component={Principal} />
         <Stack.Screen name="TabNavs" options={{headerShown: false}}  component={TabNav} />
         <Stack.Screen name="Login" options={{headerShown: false}} component={Login} />
         <Stack.Screen name="Sigup" options={{headerShown: false}} component={Sigup} />
@@ -51,7 +53,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar/>
+      <StatusBar
+                backgroundColor={"red"} />
       <StackNav/>
     </NavigationContainer>
   );
