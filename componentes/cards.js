@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 
 
@@ -22,26 +22,28 @@ export function Cards(props) {
 }
 
 export function Tarjetas(props) {
-    const { producto, precio, desc, ptovta, tipo, img } = props
-    
-    return (
-        
-        <View style={styles.card}>
-            <View style={styles.secimg}>
-                <Image source={{uri:img}} style={styles.image}></Image>
-            </View>
+    const { producto, precio, desc, ptovta, tipo, img, onPres } = props
 
-            <View style={styles.desc}>
-                <Text>{producto}</Text>
-                <Text>Precio: ${precio}</Text>
-                <Text>{desc}</Text>
-                <Text>Punto de venta: {ptovta}</Text>
-            </View>
+    return (
+        <TouchableOpacity onPress={onPres}>
+        <View style={styles.card}>
             
-            <View style={styles.tipo}>
-                <Text style={styles.text}>{tipo}</Text>
-            </View>
-        </View>
+                <View style={styles.secimg}>
+                    <Image source={{ uri: img }} style={styles.image}></Image>
+                </View>
+
+                <View style={styles.desc}>
+                    <Text>{producto}</Text>
+                    <Text>{desc}</Text>
+                    <Text>Precio: ${precio}</Text>
+                    <Text>Punto de venta: {ptovta}</Text>
+                </View>
+
+                <View style={styles.tipo}>
+                    <Text style={styles.text}>{tipo}</Text>
+                </View>
+            
+        </View></TouchableOpacity>
     );
 }
 
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center'
     },
-    image:{
+    image: {
         width: 60,
         height: 60,
         borderRadius: 50

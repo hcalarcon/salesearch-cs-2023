@@ -5,7 +5,7 @@ import { TextInput } from "react-native-paper";
 
 export function Input (props){
 
-    const {texto, tipo, place, ico} = props
+    const {texto, tipo, place, ico, cambios} = props
     return (
         <View>
             <TextInput
@@ -16,6 +16,7 @@ export function Input (props){
                 activeOutlineColor="red"
                 secureTextEntry
                 mode="outlined"
+                onChangeText={cambios}
                 right={<TextInput.Icon icon={ico} />}
             >
             </TextInput>
@@ -25,7 +26,6 @@ export function Input (props){
 
 const styles = StyleSheet.create({
     textinput:{
-        marginTop: 20,
         width: 350,
         fontSize: 15,
     },

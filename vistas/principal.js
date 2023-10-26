@@ -20,6 +20,7 @@ const Principal = ({navigation}) => {
         <View style={styles.botones}>
           <Botones texto="Iniciar Sesión" onPres={() => navigation.navigate('Login')} />
           <Botones texto="Crear Cuenta" onPres={() => navigation.navigate('Sigup')} />
+          
         </View>
       </ImageBackground>
     </View>

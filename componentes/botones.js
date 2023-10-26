@@ -13,13 +13,13 @@ export function Botones (props)
     )
 }
 
-export function Link(props){
+export function Link (props){
 
-    const {texto, OnPres} = props
+    const {texto, onPres} = props
 
     return (
         <View>
-            <TouchableOpacity onPress={OnPres}>
+            <TouchableOpacity onPress={onPres}>
                 <Text style={styles.link}>
                     {texto}
                 </Text>
