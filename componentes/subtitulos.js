@@ -1,32 +1,26 @@
 import React from "react";
 import { Text } from "react-native";
 
-
 const Subtitulos = (props) => {
-
-    const { texto, font } = props
-    return (
-        <Text>
-            <Text style={{
-                fontSize: font,
-                color: "red",
-                fontWeight: 'bold'
-            }}>
-                {texto}
-            </Text>
-        </Text>
-    )
-}
+  const { texto, font } = props;
+  return (
+    <Text
+      style={{
+        fontSize: font,
+        color: "red",
+        fontWeight: "bold",
+        marginTop: 10,
+      }}
+    >
+      {texto}
+    </Text>
+  );
+};
 
 export function messageErr(props) {
-    const { texto } = props
+  const { texto } = props;
 
-    return (
-        <Text>
-            {texto}
-        </Text>
-    )
+  return <Text>{texto}</Text>;
 }
-
 
 export default Subtitulos;

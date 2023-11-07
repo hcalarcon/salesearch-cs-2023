@@ -3,14 +3,15 @@ import { View, StyleSheet, Image, StatusBar, ScrollView } from "react-native";
 import { Botones, Link } from "../componentes/botones";
 import Subtitulo from "../componentes/subtitulos"
 import { Input } from "../componentes/input"
-import { LogCheck, getPubli } from "../api"
+import { LogCheck } from "../api"
 
 const rutaimg = '../assets/login_ico.png'
 
 const Login = ({ navigation }) => {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState(""); //en este estado se guardan el email
+    const [password, setPassword] = useState("");// en este estado se guardan el password
+    const [errorMessage, setErrorMessage] = useState("");// en este estado se guada el mensaje de error
 
     const handleLogin = async (email, password) => {
         const Data = await LogCheck(email, password)
@@ -18,7 +19,7 @@ const Login = ({ navigation }) => {
         if (Data.success) {
             navigation.navigate("TabNavs")
         } else {
-            console.log(Data)
+            setErrorMessage("usuario o contraseña incorrecto");
         }
     }
     return (
@@ -32,13 +33,18 @@ const Login = ({ navigation }) => {
                 </View>
                 <View style={styles.sec30}>
                     <Input texto="Ingresar email" tipo="email" ico="account" cambios={setEmail}></Input>
-                    {/* <Subtitulo texto="ingresar email" font={10} /> */}
+                    
                     <Input texto="Ingresar contraseña" tipo="numeric" ico="eye" cambios={setPassword}> </Input>
-                    {/* <Subtitulo texto="ingresar contraseña" font={10} /> */}
+                    
+                    {errorMessage ? (
+                        <Subtitulo texto={errorMessage} font={15} />
+                    ) : null }
+
                     <Botones texto="Ingresar" onPres={() => {
                         
                         if (email === "" || password === "") {
-                            console.log("insertar email o password")
+                            setErrorMessage("ingresar usuario y contraseña")
+                            
                         } else {
                             handleLogin(email, password)
                         }
