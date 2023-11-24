@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Image } from "react-native";
 import { Botones, Link } from "../componentes/botones";
 import { Input } from "../componentes/input";
 import Subtitulo from "../componentes/subtitulos";
-import { createUser } from "../api";
+import { createUser } from "../utility/api";
 
 const rutaimg = "../assets/singup.png";
 
