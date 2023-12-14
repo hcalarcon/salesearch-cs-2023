@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Image } from "react-native";
 import { Botones, Link } from "../componentes/botones";
 import { Input } from "../componentes/input";
 import Subtitulo from "../componentes/subtitulos";
-import { createUser } from "../utility/api";
+import { createUser } from "../src/utility/api";
 
 const rutaimg = "../assets/singup.png";
 
@@ -19,7 +19,7 @@ const Sigup = ({ navigation }) => {
     const Data = await createUser(username, email, password);
     console.log(Data);
     if (Data.success) {
-      navigation.navigate("TabNavs");
+      navigation.navigate("NabTavs");
     } else {
       {
         Data.status

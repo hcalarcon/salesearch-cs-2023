@@ -34,11 +34,7 @@ const Inicial = ({ navigation }) => {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
 
 const styles = StyleSheet.create({

@@ -1,14 +1,13 @@
 import React from "react";
 import { StyleSheet, View, ImageBackground, Image, Alert } from "react-native";
 import { Botones } from "../componentes/botones";
-import estilos from "../Styles/stilos"
 
 const fbgimage = "../assets/background.jpg";
 const bgimage = "../assets/img_pantalla_inicio.png";
 
-const Principal = ({navigation}) => {
+const Principal = ({ navigation }) => {
   return (
-    <View style={estilos.container}>
+    <View style={{ flex: 1 }}>
       <ImageBackground
         source={require(fbgimage)}
         resizeMode="cover"
@@ -18,14 +17,19 @@ const Principal = ({navigation}) => {
           <Image source={require(bgimage)} style={styles.img_inicio} />
         </View>
         <View style={styles.botones}>
-          <Botones texto="Iniciar Sesión" onPres={() => navigation.navigate('Login')} />
-          <Botones texto="Crear Cuenta" onPres={() => navigation.navigate('Sigup')} />
-          
+          <Botones
+            texto="Iniciar Sesión"
+            onPres={() => navigation.navigate("Login")}
+          />
+          <Botones
+            texto="Crear Cuenta"
+            onPres={() => navigation.navigate("Sigup")}
+          />
         </View>
       </ImageBackground>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

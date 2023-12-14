@@ -1,9 +1,13 @@
+import { rutaApi } from "../constans/constantes";
+
 //endpoint del api
-const ruta = "http:192.168.3.122:3000";
-const api = `${ruta}/user/login`;
-const publi = `${ruta}/publi`;
-const apisu = `${ruta}/user/usersp`;
-const update = `${ruta}/user/update`;
+
+const api = `${rutaApi}/user/login`;
+const publi = `${rutaApi}/publi`;
+const apisu = `${rutaApi}/user/usersp`;
+const update = `${rutaApi}/user/update`;
+const profileimg = `${rutaApi}/profileimg`;
+const imageUpdates = `${rutaApi}/user/updateImage`;
 
 //funcion para loguear usuario
 export const LogCheck = async (email, password) => {
@@ -37,14 +41,33 @@ export const createUser = async (username, email, password) => {
 export const updateUser = async (props) => {
   const { username, userId, nombre, apellido, email, dni } = props;
 
-  const response = await fetch(update, {
-    method: "PUT",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ username, email, nombre, apellido, dni, userId }),
-  });
-  return await response.json();
+  try {
+    const response = await fetch(update, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ username, email, nombre, apellido, dni, userId }),
+    });
+    return await response.json();
+  } catch (er) {
+    console.error(er);
+  }
+};
+
+export const updateImage = async (imagen, userId) => {
+  try {
+    const response = await fetch(imageUpdates, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ img: imagen, userId }),
+    });
+    return await response.json();
+  } catch (er) {
+    console.error("Erro al actualizar la imagen", er);
+  }
 };
 
 export const getPubli = async () => {
@@ -52,4 +75,7 @@ export const getPubli = async () => {
   return await response.json();
 };
 
-export const getImageProfile = async () => {};
+export const getImageProfile = async () => {
+  const response = await fetch(profileimg);
+  return await response.json();
+};

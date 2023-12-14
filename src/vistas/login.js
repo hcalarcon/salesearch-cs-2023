@@ -3,9 +3,9 @@ import { View, StyleSheet, Image, StatusBar, ScrollView } from "react-native";
 import { Botones, Link } from "../componentes/botones";
 import Subtitulo from "../componentes/subtitulos";
 import { Input } from "../componentes/input";
-import { LogCheck } from "../utility/api";
-import storage from "../utility/storage";
-import { TextInput } from "react-native-paper";
+import { LogCheck } from "../src/utility/api";
+import storage from "../src/utility/storage";
+import PasswordInput from "../../componentes/passwordInput";
 
 const rutaimg = "../assets/login_ico.png";
 
@@ -23,17 +23,8 @@ const Login = ({ navigation }) => {
     const Data = await LogCheck(email, password);
 
     //desestructuro los datos que vienen desde el backend
-    const {
-      success,
-      token,
-      username,
-      userId,
-      nombre,
-      apellido,
-      emailbd,
-      dni,
-      img,
-    } = Data;
+    const { success, token, username, userId, nombre, apellido, emailbd, dni } =
+      Data;
     if (success) {
       //creao un objeto usuario, usando los datos de la base de datos
       const usuario = {
@@ -43,7 +34,6 @@ const Login = ({ navigation }) => {
         apellido,
         emailbd,
         dni,
-        img,
       };
       storage.save({ key: "token", data: { token } }); //guardo el token de sesión
       storage.save({ key: "usuario", data: usuario }); // guardo el usuario
@@ -68,23 +58,11 @@ const Login = ({ navigation }) => {
             cambios={setEmail}
           ></Input>
 
-          <TextInput
+          <PasswordInput
             value={password}
-            label={"Ingresar contraseña"}
-            style={styles.textinput}
-            inputMode="numeric"
-            textColor="black"
-            activeOutlineColor="red"
-            mode="outlined"
-            onChangeText={setPassword}
-            secureTextEntry={ocultarTexto}
-            right={
-              <TextInput.Icon
-                icon={ocultarTexto ? "eye" : "eye-off"}
-                onPress={toggleOcultarTexto}
-              />
-            }
-          ></TextInput>
+            label="ingresar contraseña"
+            onchange={setPassword}
+          />
 
           {errorMessage ? <Subtitulo texto={errorMessage} font={15} /> : null}
 

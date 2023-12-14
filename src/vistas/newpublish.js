@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import Subtitulos from "../componentes/subtitulos";
 import { Input } from "../componentes/input";
 import Picker from "../componentes/picker";
-import { getCategoria, getAll } from "../utility/apiproducto";
+import { getCategoria, getAll } from "../src/utility/apiproducto";
 
 const Newpublish = ({ navigator }) => {
   const [producto, setProducto] = useState("");
@@ -62,7 +62,7 @@ const Newpublish = ({ navigator }) => {
           type="none"
           cambios={setPrecio}
         ></Input>
-        {/* <Picker
+        <Picker
           //mapeo el array data, para construir uno nuevo con los datos id y key
           data={categorias.map((cat) => ({
             key: cat.catId,
@@ -85,7 +85,7 @@ const Newpublish = ({ navigator }) => {
             value: pv.nombre,
           }))}
           cambios={setPtoVta}
-        /> */}
+        />
       </ScrollView>
     </View>
   );

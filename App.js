@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Principal from "./vistas/principal";
 import Home from "./vistas/home";
 import Login from "./vistas/login";
@@ -13,6 +13,10 @@ import Newpublish from "./vistas/newpublish";
 import Account from "./vistas/account";
 import Recuperar from "./vistas/recuperar";
 import Inicial from "./vistas/inicial";
+import datosPersonales from "./vistas/datosPersonales";
+import CambiarContra from "./vistas/CambiarContra";
+import cambiarFotoPerfil from "./vistas/cambiarFotoPerfil";
+import { primaryColor } from "./constans/constantes";
 
 const Tabs = createMaterialBottomTabNavigator();
 
@@ -22,8 +26,8 @@ const TabNav = () => {
       activeColor="black"
       inactiveColor="#f0edf6"
       barStyle={{
-        backgroundColor: "#F52C01",
-        height: 55,
+        backgroundColor: "#EB5D57",
+        height: 50,
       }}
     >
       <Tabs.Screen
@@ -32,7 +36,7 @@ const TabNav = () => {
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <Icon name="home" color={color} size={26} />
           ),
         }}
       />
@@ -42,7 +46,7 @@ const TabNav = () => {
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="plus" color={color} size={30} />
+            <Icon name="plus" color={color} size={30} />
           ),
         }}
       />
@@ -53,7 +57,7 @@ const TabNav = () => {
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={30} />
+            <Icon name="account" color={color} size={30} />
           ),
         }}
       />
@@ -101,6 +105,39 @@ const StackNav = () => {
         options={{ headerShown: false }}
         component={Recuperar}
       />
+      <Stack.Screen
+        name="DatosPersonales"
+        options={{
+          headerShown: true,
+          title: "Modificar datos personales",
+          headerStyle: {
+            backgroundColor: "#EB5D57",
+          },
+        }}
+        component={datosPersonales}
+      />
+      <Stack.Screen
+        name="CambiarContrasena"
+        options={{
+          headerShown: true,
+          title: "Modificar contraseña",
+          headerStyle: {
+            backgroundColor: "#EB5D57",
+          },
+        }}
+        component={CambiarContra}
+      />
+      <Stack.Screen
+        name="CambiarFoto"
+        options={{
+          headerShown: true,
+          title: "Foto de perfil",
+          headerStyle: {
+            backgroundColor: primaryColor,
+          },
+        }}
+        component={cambiarFotoPerfil}
+      />
     </Stack.Navigator>
   );
 };
@@ -108,7 +145,7 @@ const StackNav = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={"red"} />
+      <StatusBar backgroundColor={primaryColor} style="light" />
       <StackNav />
     </NavigationContainer>
   );

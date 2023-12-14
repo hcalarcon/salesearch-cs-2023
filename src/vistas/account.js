@@ -1,73 +1,84 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Constants from "expo-constants";
-import storage from "../utility/storage";
+import storage from " ../utility/storage";
 import Subtitulos from "../componentes/subtitulos";
+import { updateUser } from "../src/utility/api";
 import Slice from "../componentes/boton-slice";
-import { rutaImage } from "../constans/constantes";
-import { useFocusEffect } from "@react-navigation/native";
 
 const Account = ({ navigation }) => {
-  const [user, setUser] = useState({});
-  useFocusEffect(() => {
-    const getUser = async () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [dni, setDni] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirPassword, setConfirPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const obtener = async () => {
       try {
+        const token = await storage.load({ key: "token" });
         const user = await storage.load({ key: "usuario" });
-        setUser(user);
+        setUsername(user.username);
+        setEmail(user.emailbd);
+        setNombre(user.nombre);
+        setApellido(user.apellido);
+        setDni(user.dni);
       } catch (error) {
-        console.log("error al obtener usuario", error);
+        console.log("error", error);
       }
     };
-    getUser();
-  });
 
-  const handleDatosPersonales = () => {
-    navigation.navigate("DatosPersonales", { usuario: user });
-  };
+    obtener();
+  }, []);
 
-  const handleCambiarFoto = () => {
-    navigation.navigate("CambiarFoto", { usuario: user });
-  };
+  const updateDatos = async () => {
+    const Data = await updateUser(
+      username,
+      nombre,
+      apellido,
+      dni,
+      email,
+      password
+    );
 
-  const handleCerrarSession = async () => {
-    try {
-      await storage.remove({ key: "token" });
-      await storage.remove({ key: "usuario" });
-
-      navigation.navigate("Principal");
-    } catch (e) {
-      console.error("Error al intentar de eliminar token: ", e);
-    }
+    console.log(Data);
+    // if (Data.status === 200) {
+    //   console.log("success");
+    // } else {
+    // }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={{ uri: `${rutaImage}/${user.img}` }}
+          source={require("../assets/icon.png")}
           style={styles.img}
         ></Image>
         <View style={styles.subheader}>
-          <Subtitulos texto={`Bienvenido ${user.username}`} font={20} />
-          <Text>{user.emailbd}</Text>
+          <Subtitulos texto={`Bienvenido ${username}`} font={20} />
+          <Text>{email}</Text>
         </View>
       </View>
       <Slice
-        texto="Modificar datos personales"
-        onPress={() => handleDatosPersonales()}
+        texto="Mooodificar datos personales"
+        onPress={() => console.log("asd")}
       ></Slice>
       <Slice
         texto="Cambiar contraseña"
-        onPress={() => navigation.navigate("CambiarContrasena")}
+        onPress={() => console.log("alho")}
       ></Slice>
 
       <Slice
         texto="Cambiar foto de perfil"
-        onPress={() => handleCambiarFoto()}
+        onPress={() => console.log("alho")}
       ></Slice>
       <Slice
         texto="Cerrar Sessión "
-        onPress={() => handleCerrarSession()}
+        onPress={() => console.log("alho")}
       ></Slice>
     </View>
   );
@@ -82,9 +93,9 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   img: {
-    width: 200,
-    height: 200,
-    borderRadius: 35,
+    width: 150,
+    height: 150,
+    borderRadius: 50,
     borderColor: "red",
     borderWidth: 1,
   },
@@ -174,7 +185,9 @@ export default Account;
             <Botones
               texto="Cerrar Sesión"
               onPres={() => {
-                
+                storage.remove({ key: "token" });
+                storage.remove({ key: "usuario" });
+                navigation.navigate("Principal");
               }}
             ></Botones>
           </View>
